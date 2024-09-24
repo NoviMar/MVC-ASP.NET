@@ -1,0 +1,94 @@
+﻿@model List<WebApplication2.Models.Domaim.BlogPost>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    <br /><br />
+    <h5>Adding a new blog</h5><br />
+    <input type="hidden" id="BlogPostId" />
+    <p>
+        Heading:<br />
+        <input id="BlogPostHeading" />
+    </p>
+    <p>
+        Title:<br />
+        <input id="BlogPostPageTitle" />
+    </p>
+    <p>
+        Content:<br />
+        <input id="BlogPostContent" />
+    </p>
+    <p>
+        ShortDescription:<br />
+        <input id="BlogPostShortDescription" />
+    </p>
+    <p>
+        FeaturedImageUrl:<br />
+        <input id="BlogPostFeaturedImageUrl" />
+    </p>
+    <p>
+        UrlHandle:<br />
+        <input id="BlogPostUrlHandle" />
+    </p>
+    <p>
+        Email:<br />
+        <input type="date" id="BlogPostPublishedDate" />
+    </p>
+    <p>
+        Email:<br />
+        <input id="BlogPostAuthor" />
+    </p>
+    <p>
+        Email:<br />
+        <input id="BlogPostVisible" type="checkbox" />
+    </p>
+    <p>
+        Id tag:<br />
+        <input id="tagId" />
+    </p>
+    <p>
+        <button class="btn" id="saveBtn">Сохранить</button>
+        <button class="btn btnDl" id="resetBtn">Сбросить</button>
+    </p><br /> <br /><br /> <br />
+</div>
+<h4>Tags</h4>
+<div id="tagButtons">
+    @if (ViewBag.Tag != null)
+    {
+        foreach (var tag in ViewBag.Tag)
+        {
+            if (tag != null)
+            {
+                <button class="btn tag-button" data-tag-id="@tag.Id">@tag.Name</button>
+            }
+        }
+    }
+</div>
+<table id="dataTable" style="width:100%">
+    <thead><tr><th>Фамилия</th><th>Имя</th><th>Email</th><th>PositionId</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var user1 in Model)
+        {
+            <tr data-rowid="@user1.Id">
+                <td>@user1.Heading</td>
+                <td>@user1.PageTitle</td>
+                <td>@user1.Content</td>
+                <td>@user1.ShortDescription</td>
+                <td>
+                    <a class="btnD btn" href="/Details?id=@user1.Id">Детали</a>
+                    <a class="btnE btn" href="/Edit?id=@user1.Id">Изменить</a>
+                    <a class="btnDl btn" href="/Delete?id=@user1.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/js/script.js"></script>
+<script>
+    new DataTable('#dataTable');</script>
