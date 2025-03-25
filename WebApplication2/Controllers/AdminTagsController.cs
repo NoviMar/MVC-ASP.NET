@@ -14,15 +14,11 @@ namespace WebApplication2.Controllers
         {
             _bloggieDbContext = bloggieDbContext;
         }
-
-        // GET: AdminTagsController/Add
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
-
-        // POST: AdminTagsController/Add
         [HttpPost]
         public IActionResult Add(AddTagRequest addTagRequest)
         {
@@ -37,12 +33,10 @@ namespace WebApplication2.Controllers
                 _bloggieDbContext.Tags.Add(tag);
                 _bloggieDbContext.SaveChanges();
 
-                // Перенаправление на страницу добавления с сообщением об успешном добавлении
                 TempData["SuccessMessage"] = "Tag added successfully!";
                 return RedirectToAction("Add");
             }
 
-            // Если модель не валидна, вернуть ту же страницу с ошибками
             return View(addTagRequest);
         }
     }
